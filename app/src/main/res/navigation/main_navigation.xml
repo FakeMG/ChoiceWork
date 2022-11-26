@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/schedule">
+
+    <fragment
+        android:id="@+id/schedule"
+        android:name="com.example.decisions.Schedule"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule" />
+    <fragment
+        android:id="@+id/waiting"
+        android:name="com.example.decisions.Waiting"
+        android:label="fragment_waiting"
+        tools:layout="@layout/fragment_waiting" />
+    <fragment
+        android:id="@+id/feeling"
+        android:name="com.example.decisions.Feeling"
+        android:label="fragment_feeling"
+        tools:layout="@layout/fragment_feeling" />
+    <fragment
+        android:id="@+id/library"
+        android:name="com.example.decisions.Library"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" />
+</navigation>

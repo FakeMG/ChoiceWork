@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Decisions</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="intro_text_schedule">This is schedule board</string>
+    <string name="intro_text_waiting">This is waiting board</string>
+    <string name="intro_text_feeling">This is feeling board</string>
+    <string name="intro_text_library">This is library</string>
+    <string name="menu_schedule_icon">Schedule</string>
+    <string name="menu_waiting_icon">Waiting</string>
+    <string name="menu_feeling_icon">Feeling</string>
+    <string name="menu_library_icon">Library</string>
 </resources>
