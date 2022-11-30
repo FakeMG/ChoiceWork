@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.decisions.R;
 import com.example.decisions.model.ScheduleItemModel;
 import com.example.decisions.controller.system.IClickScheduleItem;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +63,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         if (scheduleItemModel == null) {
             return;
         }
+        holder.nameSchedule.setText(scheduleItemModel.getName());
         holder.imgSchedule.setImageResource(scheduleItemModel.getResourceImage());
 
         // handle onClick event
@@ -87,12 +91,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public class ScheduleViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardViewSchedule;
+        private TextView nameSchedule;
         private ImageView imgSchedule;
 
         public ScheduleViewHolder(@NonNull View itemView) {
             super(itemView);
 
             cardViewSchedule = itemView.findViewById(R.id.card_schedule);
+            nameSchedule = itemView.findViewById(R.id.name_schedule);
             imgSchedule = itemView.findViewById(R.id.img_schedule);
         }
     }

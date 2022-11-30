@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.decisions.R;
 import com.example.decisions.model.ScheduleItemModel;
@@ -23,7 +24,9 @@ public class ScheduleActivity extends AppCompatActivity {
 
         ScheduleItemModel scheduleItemModel = (ScheduleItemModel) bundle.get("schedule_item");
 
-        ImageView schedule_iv = findViewById(R.id.schedule_iv);
-        schedule_iv.setImageResource(scheduleItemModel.getResourceImage());
+        TextView sche_name_activity = findViewById(R.id.sche_name_activity);
+        ImageView sche_img_activity = findViewById(R.id.sche_img_activity);
+        sche_name_activity.setText(scheduleItemModel.getName());
+        sche_img_activity.setImageResource(scheduleItemModel.getResourceImage());
     }
 }

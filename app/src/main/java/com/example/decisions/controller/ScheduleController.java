@@ -29,23 +29,9 @@ public class ScheduleController {
     }
 
     private ArrayList<ScheduleItemModel> dataInitialize() {
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
-
-        listSchedule.add(new ScheduleItemModel(R.drawable.ic_launcher_background));
+        for (int i = 1; i <= 13; i++) {
+            listSchedule.add(new ScheduleItemModel("Schedule " + i, R.drawable.ic_launcher_background));
+        }
 
         return listSchedule;
     }
