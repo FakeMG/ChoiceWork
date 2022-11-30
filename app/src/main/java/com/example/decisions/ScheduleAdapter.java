@@ -5,21 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.decisions.system.IClickScheduleItem;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
 
-    private Context mContext;
-    private List<ScheduleItem> mListSchedule;
+    private Context context;
+    private ArrayList<ScheduleItem> listSchedule;
+    private IClickScheduleItem iClickScheduleItem;
 
-    public ScheduleAdapter(Context mContext, List<ScheduleItem> mListSchedule) {
-        this.mContext = mContext;
-        this.mListSchedule = mListSchedule;
+    public ScheduleAdapter(Context context, ArrayList<ScheduleItem> listSchedule, IClickScheduleItem iClickScheduleItem) {
+        this.context = context;
+        this.listSchedule = listSchedule;
+        this.iClickScheduleItem = iClickScheduleItem;
     }
 
     /**
@@ -34,7 +39,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @NonNull
     @Override
     public ScheduleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_schedule, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_schedule, parent, false);
         return new ScheduleViewHolder(view);
     }
 
@@ -49,11 +54,19 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
      */
     @Override
     public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position) {
-        ScheduleItem schedule = mListSchedule.get(position);
-        if (schedule == null) {
+        ScheduleItem scheduleItem = listSchedule.get(position);
+        if (scheduleItem == null) {
             return;
         }
-        holder.imgSchedule.setImageResource(schedule.getResourceImage());
+        holder.imgSchedule.setImageResource(scheduleItem.getResourceImage());
+
+        // handle onClick event
+        holder.cardViewSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickScheduleItem.onClickScheduleItem(scheduleItem);
+            }
+        });
     }
 
     /**
@@ -63,36 +76,38 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
      */
     @Override
     public int getItemCount() {
-        if (mListSchedule != null) {
-            return mListSchedule.size();
+        if (listSchedule != null) {
+            return listSchedule.size();
         }
         return 0;
     }
 
     public class ScheduleViewHolder extends RecyclerView.ViewHolder {
 
+        private CardView cardViewSchedule;
         private ImageView imgSchedule;
 
         public ScheduleViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            cardViewSchedule = itemView.findViewById(R.id.card_schedule);
             imgSchedule = itemView.findViewById(R.id.img_schedule);
         }
     }
 
-    public Context getmContext() {
-        return mContext;
+    public Context getContext() {
+        return context;
     }
 
-    public void setmContext(Context mContext) {
-        this.mContext = mContext;
+    public void setContext(Context context) {
+        this.context = context;
     }
 
-    public List<ScheduleItem> getmListSchedule() {
-        return mListSchedule;
+    public List<ScheduleItem> getListSchedule() {
+        return listSchedule;
     }
 
-    public void setmListSchedule(List<ScheduleItem> mListSchedule) {
-        this.mListSchedule = mListSchedule;
+    public void setListSchedule(ArrayList<ScheduleItem> listSchedule) {
+        this.listSchedule = listSchedule;
     }
 }

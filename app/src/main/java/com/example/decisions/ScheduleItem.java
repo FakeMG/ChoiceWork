@@ -1,6 +1,8 @@
 package com.example.decisions;
 
-public class ScheduleItem {
+import java.io.Serializable;
+
+public class ScheduleItem implements Serializable {
 
     private int resourceImage;
 

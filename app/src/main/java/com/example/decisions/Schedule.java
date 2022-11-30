@@ -1,5 +1,6 @@
 package com.example.decisions;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.decisions.system.IClickScheduleItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,7 @@ public class Schedule extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private List<ScheduleItem> list_schedule;
+    private ArrayList<ScheduleItem> list_schedule;
     private RecyclerView rcv_schedule;
 
     public Schedule() {
@@ -91,13 +94,31 @@ public class Schedule extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         rcv_schedule.setLayoutManager(gridLayoutManager);
         rcv_schedule.setHasFixedSize(true);
-        ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext(), list_schedule);
+        ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext(), list_schedule, new IClickScheduleItem() {
+            @Override
+            public void onClickScheduleItem(ScheduleItem scheduleItem) {
+                onClickGoToDetail(scheduleItem);
+            }
+        });
+        scheduleAdapter.setHasStableIds(true);
         rcv_schedule.setAdapter(scheduleAdapter);
         scheduleAdapter.notifyDataSetChanged();
     }
 
+    private void onClickGoToDetail(ScheduleItem scheduleItem) {
+        Intent intent = new Intent(getContext(), ScheduleActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("schedule_item", scheduleItem);
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
+    }
+
     private void dataInitialize() {
         list_schedule = new ArrayList<>();
+        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
+        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
+        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
+
         list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
         list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
         list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
