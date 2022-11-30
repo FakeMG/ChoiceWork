@@ -1,4 +1,4 @@
-package com.example.decisions;
+package com.example.decisions.view.fragment;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.decisions.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Feeling#newInstance} factory method to
+ * Use the {@link FeelingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Feeling extends Fragment {
+public class FeelingFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class Feeling extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Feeling() {
+    public FeelingFragment() {
         // Required empty public constructor
     }
 
@@ -37,8 +39,8 @@ public class Feeling extends Fragment {
      * @return A new instance of fragment Feeling.
      */
     // TODO: Rename and change types and number of parameters
-    public static Feeling newInstance(String param1, String param2) {
-        Feeling fragment = new Feeling();
+    public static FeelingFragment newInstance(String param1, String param2) {
+        FeelingFragment fragment = new FeelingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

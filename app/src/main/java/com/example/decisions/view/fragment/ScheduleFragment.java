@@ -1,30 +1,31 @@
-package com.example.decisions;
+package com.example.decisions.view.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.decisions.system.IClickScheduleItem;
+import com.example.decisions.R;
+import com.example.decisions.controller.ScheduleController;
+import com.example.decisions.model.ScheduleItemModel;
+import com.example.decisions.view.adapter.ScheduleAdapter;
+import com.example.decisions.controller.system.IClickScheduleItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Schedule#newInstance} factory method to
+ * Use the {@link ScheduleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Schedule extends Fragment {
+public class ScheduleFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,10 +36,10 @@ public class Schedule extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ArrayList<ScheduleItem> list_schedule;
     private RecyclerView rcv_schedule;
+    private ScheduleController scheduleController;
 
-    public Schedule() {
+    public ScheduleFragment() {
         // Required empty public constructor
     }
 
@@ -51,8 +52,8 @@ public class Schedule extends Fragment {
      * @return A new instance of fragment Schedule.
      */
     // TODO: Rename and change types and number of parameters
-    public static Schedule newInstance(String param1, String param2) {
-        Schedule fragment = new Schedule();
+    public static ScheduleFragment newInstance(String param1, String param2) {
+        ScheduleFragment fragment = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,50 +88,22 @@ public class Schedule extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dataInitialize();
+        scheduleController = new ScheduleController(getContext());
+        ArrayList<ScheduleItemModel> listSchedule = scheduleController.getListSchedule();
 
         rcv_schedule = view.findViewById(R.id.rcv_schedule);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         rcv_schedule.setLayoutManager(gridLayoutManager);
         rcv_schedule.setHasFixedSize(true);
-        ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext(), list_schedule, new IClickScheduleItem() {
+
+        ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext(), listSchedule, new IClickScheduleItem() {
             @Override
-            public void onClickScheduleItem(ScheduleItem scheduleItem) {
-                onClickGoToDetail(scheduleItem);
+            public void onClickScheduleItem(ScheduleItemModel scheduleItemModel) {
+                scheduleController.onClickGoToActivity(scheduleItemModel);
             }
         });
         scheduleAdapter.setHasStableIds(true);
         rcv_schedule.setAdapter(scheduleAdapter);
         scheduleAdapter.notifyDataSetChanged();
-    }
-
-    private void onClickGoToDetail(ScheduleItem scheduleItem) {
-        Intent intent = new Intent(getContext(), ScheduleActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("schedule_item", scheduleItem);
-        intent.putExtras(bundle);
-        getContext().startActivity(intent);
-    }
-
-    private void dataInitialize() {
-        list_schedule = new ArrayList<>();
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
-
-        list_schedule.add(new ScheduleItem(R.drawable.ic_launcher_background));
     }
 }

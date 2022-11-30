@@ -1,4 +1,4 @@
-package com.example.decisions;
+package com.example.decisions.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.decisions.system.IClickScheduleItem;
+import com.example.decisions.R;
+import com.example.decisions.model.ScheduleItemModel;
+import com.example.decisions.controller.system.IClickScheduleItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,10 @@ import java.util.List;
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
 
     private Context context;
-    private ArrayList<ScheduleItem> listSchedule;
+    private ArrayList<ScheduleItemModel> listSchedule;
     private IClickScheduleItem iClickScheduleItem;
 
-    public ScheduleAdapter(Context context, ArrayList<ScheduleItem> listSchedule, IClickScheduleItem iClickScheduleItem) {
+    public ScheduleAdapter(Context context, ArrayList<ScheduleItemModel> listSchedule, IClickScheduleItem iClickScheduleItem) {
         this.context = context;
         this.listSchedule = listSchedule;
         this.iClickScheduleItem = iClickScheduleItem;
@@ -54,17 +56,17 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
      */
     @Override
     public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position) {
-        ScheduleItem scheduleItem = listSchedule.get(position);
-        if (scheduleItem == null) {
+        ScheduleItemModel scheduleItemModel = listSchedule.get(position);
+        if (scheduleItemModel == null) {
             return;
         }
-        holder.imgSchedule.setImageResource(scheduleItem.getResourceImage());
+        holder.imgSchedule.setImageResource(scheduleItemModel.getResourceImage());
 
         // handle onClick event
         holder.cardViewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iClickScheduleItem.onClickScheduleItem(scheduleItem);
+                iClickScheduleItem.onClickScheduleItem(scheduleItemModel);
             }
         });
     }
@@ -103,11 +105,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         this.context = context;
     }
 
-    public List<ScheduleItem> getListSchedule() {
+    public List<ScheduleItemModel> getListSchedule() {
         return listSchedule;
     }
 
-    public void setListSchedule(ArrayList<ScheduleItem> listSchedule) {
+    public void setListSchedule(ArrayList<ScheduleItemModel> listSchedule) {
         this.listSchedule = listSchedule;
     }
 }

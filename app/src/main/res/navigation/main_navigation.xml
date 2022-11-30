@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/schedule"
-        android:name="com.example.decisions.Schedule"
+        android:name="com.example.decisions.view.fragment.ScheduleFragment"
         android:label="fragment_schedule"
         tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/waiting"
-        android:name="com.example.decisions.Waiting"
+        android:name="com.example.decisions.view.fragment.WaitingFragment"
         android:label="fragment_waiting"
         tools:layout="@layout/fragment_waiting" />
     <fragment
         android:id="@+id/feeling"
-        android:name="com.example.decisions.Feeling"
+        android:name="com.example.decisions.view.fragment.FeelingFragment"
         android:label="fragment_feeling"
         tools:layout="@layout/fragment_feeling" />
     <fragment
         android:id="@+id/library"
-        android:name="com.example.decisions.Library"
+        android:name="com.example.decisions.view.fragment.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" />
 </navigation>

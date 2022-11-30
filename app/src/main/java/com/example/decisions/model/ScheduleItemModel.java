@@ -1,12 +1,12 @@
-package com.example.decisions;
+package com.example.decisions.model;
 
 import java.io.Serializable;
 
-public class ScheduleItem implements Serializable {
+public class ScheduleItemModel implements Serializable {
 
     private int resourceImage;
 
-    public ScheduleItem(int resourceImage) {
+    public ScheduleItemModel(int resourceImage) {
         this.resourceImage = resourceImage;
     }
 
