@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +20,6 @@ import com.example.decisions.view.adapter.ScheduleFragmentAdapter;
 import com.example.decisions.controller.system.IClickScheduleBoard;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -104,12 +101,6 @@ public class ScheduleFragment extends Fragment {
             @Override
             public void onClickScheduleBoard(ScheduleBoardModel scheduleBoardModel) {
                 scheduleFragmentController.onClickGoToBoard(scheduleBoardModel);
-                ScheduleBoardFragment scheduleBoardFragment = new ScheduleBoardFragment();
-                scheduleBoardFragment.setArguments(scheduleFragmentController.getBundleScheduleItem());
-
-                MainActivity mainActivity = (MainActivity) getActivity();
-
-                mainActivity.replaceFragment(R.id.fragment_schedule, scheduleBoardFragment);
             }
         });
         scheduleFragmentAdapter.setHasStableIds(true);

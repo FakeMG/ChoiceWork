@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.decisions.R;
+import com.example.decisions.controller.ScheduleBoardController;
 import com.example.decisions.model.ScheduleBoardModel;
 
 /**
@@ -25,8 +26,7 @@ public class ScheduleBoardFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private TextView scheduleBoardTv;
-    private ImageView scheduleBoardIv;
+    private ScheduleBoardController scheduleBoardController;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -70,18 +70,11 @@ public class ScheduleBoardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_schedule_board, container, false);
-        scheduleBoardTv = view.findViewById(R.id.schedule_name_activity);
-        scheduleBoardIv = view.findViewById(R.id.schedule_img_activity);
 
         Bundle bundle = getArguments();
 
-        if (bundle != null) {
-            ScheduleBoardModel scheduleBoardModel = (ScheduleBoardModel) bundle.get("schedule_board");
-            if (scheduleBoardModel != null) {
-                scheduleBoardTv.setText(scheduleBoardModel.getName());
-                scheduleBoardIv.setImageResource(scheduleBoardModel.getResourceImage());
-            }
-        }
+        scheduleBoardController = new ScheduleBoardController(view, bundle);
+        scheduleBoardController.setData();
 
         return view;
     }
