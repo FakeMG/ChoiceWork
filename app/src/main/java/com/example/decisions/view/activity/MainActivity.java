@@ -11,25 +11,27 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
 import com.example.decisions.R;
+import com.example.decisions.controller.system.IReplaceFragment;
 import com.example.decisions.view.fragment.schedule.ScheduleFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IReplaceFragment {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        replaceFragment(R.id.fragment_schedule, new ScheduleFragment());
-
         // link bottom navigation and fragments
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        replaceFragment(R.id.fragment_schedule, new ScheduleFragment());
     }
 
+    @Override
     public void replaceFragment(int fragmentId, Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
