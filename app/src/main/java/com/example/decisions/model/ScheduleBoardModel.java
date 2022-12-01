@@ -2,12 +2,12 @@ package com.example.decisions.model;
 
 import java.io.Serializable;
 
-public class ScheduleItemModel implements Serializable {
+public class ScheduleBoardModel implements Serializable {
 
     private String name;
     private int resourceImage;
 
-    public ScheduleItemModel(String name, int resourceImage) {
+    public ScheduleBoardModel(String name, int resourceImage) {
         this.name = name;
         this.resourceImage = resourceImage;
     }

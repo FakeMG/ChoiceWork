@@ -5,7 +5,7 @@
     android:id="@+id/fragment_schedule"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.ScheduleFragment">
+    tools:context=".view.fragment.schedule.ScheduleFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_schedule"

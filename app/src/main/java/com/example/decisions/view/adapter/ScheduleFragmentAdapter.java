@@ -12,24 +12,22 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.decisions.R;
-import com.example.decisions.model.ScheduleItemModel;
-import com.example.decisions.controller.system.IClickScheduleItem;
-
-import org.w3c.dom.Text;
+import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.controller.system.IClickScheduleBoard;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
+public class ScheduleFragmentAdapter extends RecyclerView.Adapter<ScheduleFragmentAdapter.ScheduleViewHolder> {
 
     private Context context;
-    private ArrayList<ScheduleItemModel> listSchedule;
-    private IClickScheduleItem iClickScheduleItem;
+    private ArrayList<ScheduleBoardModel> listSchedule;
+    private IClickScheduleBoard iClickScheduleBoard;
 
-    public ScheduleAdapter(Context context, ArrayList<ScheduleItemModel> listSchedule, IClickScheduleItem iClickScheduleItem) {
+    public ScheduleFragmentAdapter(Context context, ArrayList<ScheduleBoardModel> listSchedule, IClickScheduleBoard iClickScheduleBoard) {
         this.context = context;
         this.listSchedule = listSchedule;
-        this.iClickScheduleItem = iClickScheduleItem;
+        this.iClickScheduleBoard = iClickScheduleBoard;
     }
 
     /**
@@ -59,18 +57,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
      */
     @Override
     public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position) {
-        ScheduleItemModel scheduleItemModel = listSchedule.get(position);
-        if (scheduleItemModel == null) {
+        ScheduleBoardModel scheduleBoardModel = listSchedule.get(position);
+        if (scheduleBoardModel == null) {
             return;
         }
-        holder.nameSchedule.setText(scheduleItemModel.getName());
-        holder.imgSchedule.setImageResource(scheduleItemModel.getResourceImage());
+        holder.nameSchedule.setText(scheduleBoardModel.getName());
+        holder.imgSchedule.setImageResource(scheduleBoardModel.getResourceImage());
 
         // handle onClick event
         holder.cardViewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iClickScheduleItem.onClickScheduleItem(scheduleItemModel);
+                iClickScheduleBoard.onClickScheduleBoard(scheduleBoardModel);
             }
         });
     }
@@ -111,11 +109,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         this.context = context;
     }
 
-    public List<ScheduleItemModel> getListSchedule() {
+    public List<ScheduleBoardModel> getListSchedule() {
         return listSchedule;
     }
 
-    public void setListSchedule(ArrayList<ScheduleItemModel> listSchedule) {
+    public void setListSchedule(ArrayList<ScheduleBoardModel> listSchedule) {
         this.listSchedule = listSchedule;
     }
 }

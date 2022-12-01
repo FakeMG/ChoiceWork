@@ -1,10 +1,12 @@
-package com.example.decisions.view.fragment;
+package com.example.decisions.view.fragment.schedule;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,12 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.decisions.R;
-import com.example.decisions.controller.ScheduleController;
-import com.example.decisions.model.ScheduleItemModel;
-import com.example.decisions.view.adapter.ScheduleAdapter;
-import com.example.decisions.controller.system.IClickScheduleItem;
+import com.example.decisions.controller.ScheduleFragmentController;
+import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.view.activity.MainActivity;
+import com.example.decisions.view.adapter.ScheduleFragmentAdapter;
+import com.example.decisions.controller.system.IClickScheduleBoard;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +41,7 @@ public class ScheduleFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView rcv_schedule;
-    private ScheduleController scheduleController;
+    private ScheduleFragmentController scheduleFragmentController;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -88,22 +92,28 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        scheduleController = new ScheduleController(getContext());
-        ArrayList<ScheduleItemModel> listSchedule = scheduleController.getListSchedule();
+        scheduleFragmentController = new ScheduleFragmentController(getContext());
+        ArrayList<ScheduleBoardModel> listSchedule = scheduleFragmentController.getListSchedule();
 
         rcv_schedule = view.findViewById(R.id.rcv_schedule);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         rcv_schedule.setLayoutManager(gridLayoutManager);
         rcv_schedule.setHasFixedSize(true);
 
-        ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext(), listSchedule, new IClickScheduleItem() {
+        ScheduleFragmentAdapter scheduleFragmentAdapter = new ScheduleFragmentAdapter(getContext(), listSchedule, new IClickScheduleBoard() {
             @Override
-            public void onClickScheduleItem(ScheduleItemModel scheduleItemModel) {
-                scheduleController.onClickGoToActivity(scheduleItemModel);
+            public void onClickScheduleBoard(ScheduleBoardModel scheduleBoardModel) {
+                scheduleFragmentController.onClickGoToBoard(scheduleBoardModel);
+                ScheduleBoardFragment scheduleBoardFragment = new ScheduleBoardFragment();
+                scheduleBoardFragment.setArguments(scheduleFragmentController.getBundleScheduleItem());
+
+                MainActivity mainActivity = (MainActivity) getActivity();
+
+                mainActivity.replaceFragment(R.id.fragment_schedule, scheduleBoardFragment);
             }
         });
-        scheduleAdapter.setHasStableIds(true);
-        rcv_schedule.setAdapter(scheduleAdapter);
-        scheduleAdapter.notifyDataSetChanged();
+        scheduleFragmentAdapter.setHasStableIds(true);
+        rcv_schedule.setAdapter(scheduleFragmentAdapter);
+        scheduleFragmentAdapter.notifyDataSetChanged();
     }
 }
