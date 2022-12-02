@@ -5,6 +5,7 @@
     android:id="@+id/fragment_schedule"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_scrollFlags="snapMargins"
     tools:context=".view.fragment.schedule.ScheduleFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="32dp"
         tools:listitem="@layout/item_schedule" />
 </RelativeLayout>
