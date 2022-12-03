@@ -1,20 +1,37 @@
 package com.example.decisions.controller;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.decisions.R;
+import com.example.decisions.model.ScheduleActionModel;
 import com.example.decisions.model.ScheduleBoardModel;
+
+import java.util.ArrayList;
 
 public class ScheduleBoardController {
     private View view;
     private Bundle bundle;
+    private Context context;
+    private ArrayList<ScheduleActionModel> listActionSchedule;
 
     public ScheduleBoardController(View view, Bundle bundle) {
         this.view = view;
         this.bundle = bundle;
+    }
+
+    public ScheduleBoardController(Context context) {
+        this.context = context;
+    }
+
+    public void dataInitialize() {
+        listActionSchedule = new ArrayList<>();
+        for (int i = 1; i <= 9; i++) {
+            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01));
+        }
     }
 
     public void setData() {
@@ -27,5 +44,37 @@ public class ScheduleBoardController {
                 scheduleBoardIv.setImageResource(scheduleBoardModel.getResourceImage());
             }
         }
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public Bundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(Bundle bundle) {
+        this.bundle = bundle;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public ArrayList<ScheduleActionModel> getListActionSchedule() {
+        return listActionSchedule;
+    }
+
+    public void setListActionSchedule(ArrayList<ScheduleActionModel> listActionSchedule) {
+        this.listActionSchedule = listActionSchedule;
     }
 }

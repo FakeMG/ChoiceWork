@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.decisions.R;
+import com.example.decisions.controller.ScheduleBoardController;
 import com.example.decisions.controller.system.IReplaceFragment;
 import com.example.decisions.view.fragment.schedule.ScheduleBoardFragment;
 
@@ -23,6 +24,9 @@ public class ScheduleBoardActivity extends AppCompatActivity implements IReplace
         if (bundle == null) {
             return;
         }
+
+        ScheduleBoardController scheduleBoardController = new ScheduleBoardController(findViewById(R.id.name_schedule_board), bundle);
+        scheduleBoardController.setData();
 
         ScheduleBoardFragment scheduleBoardFragment = new ScheduleBoardFragment();
         scheduleBoardFragment.setArguments(bundle);

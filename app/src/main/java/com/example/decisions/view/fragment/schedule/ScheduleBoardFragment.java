@@ -2,17 +2,22 @@ package com.example.decisions.view.fragment.schedule;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.decisions.R;
 import com.example.decisions.controller.ScheduleBoardController;
-import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.model.ScheduleActionModel;
+import com.example.decisions.view.adapter.ScheduleBoardAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +31,7 @@ public class ScheduleBoardFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private RecyclerView rcv_schedule_action;
     private ScheduleBoardController scheduleBoardController;
 
     // TODO: Rename and change types of parameters
@@ -70,12 +76,24 @@ public class ScheduleBoardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_schedule_board, container, false);
-
-        Bundle bundle = getArguments();
-
-        scheduleBoardController = new ScheduleBoardController(view, bundle);
-        scheduleBoardController.setData();
-
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        scheduleBoardController = new ScheduleBoardController(getContext());
+
+        scheduleBoardController.dataInitialize();
+        ArrayList<ScheduleActionModel> listActionSchedule = scheduleBoardController.getListActionSchedule();
+
+        rcv_schedule_action = view.findViewById(R.id.rcv_schedule_action);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rcv_schedule_action.setLayoutManager(linearLayoutManager);
+
+        ScheduleBoardAdapter scheduleBoardAdapter = new ScheduleBoardAdapter(getContext(), listActionSchedule);
+        rcv_schedule_action.setAdapter(scheduleBoardAdapter);
+        scheduleBoardAdapter.notifyDataSetChanged();
     }
 }
