@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,8 @@ import com.example.decisions.model.ScheduleActionModel;
 import com.example.decisions.view.adapter.ScheduleBoardAdapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,5 +98,24 @@ public class ScheduleBoardFragment extends Fragment {
         ScheduleBoardAdapter scheduleBoardAdapter = new ScheduleBoardAdapter(getContext(), listActionSchedule);
         rcv_schedule_action.setAdapter(scheduleBoardAdapter);
         scheduleBoardAdapter.notifyDataSetChanged();
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder scheduleActionDragged, @NonNull RecyclerView.ViewHolder target) {
+                int positionDragged = scheduleActionDragged.getAdapterPosition();
+                int positionTarget = target.getAdapterPosition();
+
+                Collections.swap(scheduleBoardController.getListActionSchedule(), positionDragged, positionTarget);
+                scheduleBoardAdapter.notifyItemMoved(positionDragged, positionTarget);
+
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(rcv_schedule_action);
     }
 }
