@@ -1,11 +1,11 @@
 package com.example.decisions.view.adapter;
 
 import android.content.Context;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +15,7 @@ import com.example.decisions.model.ScheduleActionModel;
 
 import java.util.ArrayList;
 
-public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdapter.ScheduleBoardHolder> {
+public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdapter.ScheduleBoardHolder> implements View.OnDragListener, View.OnLongClickListener {
 
     private Context context;
     private ArrayList<ScheduleActionModel> listScheduleAction;
@@ -57,6 +57,8 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
             return;
         }
         holder.imgScheduleAction.setImageResource(scheduleActionModel.getResourceImage());
+        holder.doubleArrowRight.setImageResource(scheduleActionModel.getDoubleArrowRightImage());
+        holder.imgScheduleActionCompleted.setImageResource(scheduleActionModel.getResourceImageCompleted());
     }
 
     /**
@@ -72,13 +74,27 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
         return 0;
     }
 
+    @Override
+    public boolean onDrag(View view, DragEvent dragEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        return false;
+    }
+
     public class ScheduleBoardHolder extends RecyclerView.ViewHolder {
         private ImageView imgScheduleAction;
+        private ImageView doubleArrowRight;
+        private ImageView imgScheduleActionCompleted;
 
         public ScheduleBoardHolder(@NonNull View itemView) {
             super(itemView);
 
             imgScheduleAction = itemView.findViewById(R.id.img_schedule_action);
+            doubleArrowRight = itemView.findViewById(R.id.double_arrow_right);
+            imgScheduleActionCompleted = itemView.findViewById(R.id.img_schedule_action_completed);
         }
     }
 
