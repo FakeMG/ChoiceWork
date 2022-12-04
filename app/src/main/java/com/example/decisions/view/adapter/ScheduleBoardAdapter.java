@@ -1,11 +1,17 @@
 package com.example.decisions.view.adapter;
 
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.Context;
+import android.graphics.Color;
+import android.media.Image;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +44,16 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
     @Override
     public ScheduleBoardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_action_schedule, parent, false);
+
+        ImageView imgScheduleAction = view.findViewById(R.id.img_schedule_action);
+        ImageView imgScheduleActionCompleted = view.findViewById(R.id.img_schedule_action_completed);
+
+        imgScheduleAction.setOnDragListener(this);
+        imgScheduleAction.setOnLongClickListener(this);
+
+        imgScheduleActionCompleted.setOnDragListener(this);
+        imgScheduleActionCompleted.setOnLongClickListener(this);
+
         return new ScheduleBoardHolder(view);
     }
 
@@ -56,9 +72,15 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
         if (scheduleActionModel == null) {
             return;
         }
-        holder.imgScheduleAction.setImageResource(scheduleActionModel.getResourceImage());
+        int resourceImage = scheduleActionModel.getResourceImage();
+        holder.imgScheduleAction.setTag(Integer.toString(resourceImage));
+        holder.imgScheduleAction.setImageResource(resourceImage);
+
         holder.doubleArrowRight.setImageResource(scheduleActionModel.getDoubleArrowRightImage());
-        holder.imgScheduleActionCompleted.setImageResource(scheduleActionModel.getResourceImageCompleted());
+
+        int resourceImageCompleted = scheduleActionModel.getResourceImageCompleted();
+        holder.imgScheduleActionCompleted.setTag(Integer.toString(resourceImageCompleted));
+        holder.imgScheduleActionCompleted.setImageResource(resourceImageCompleted);
     }
 
     /**
@@ -74,13 +96,118 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
         return 0;
     }
 
-    @Override
-    public boolean onDrag(View view, DragEvent dragEvent) {
-        return false;
-    }
-
+    /**
+     * Sets a long click listener for the ImageScheduleActionView
+     * @param view View
+     * @return
+     */
     @Override
     public boolean onLongClick(View view) {
+        ClipData.Item itemSchedule = new ClipData.Item((CharSequence) view.getTag());
+
+        // Create a new ClipData using the tag as a label, the plain text MIME type, and
+        // the already-created item. This creates a new ClipDescription object within the
+        // ClipData and sets its MIME type to "text/plain".
+        ClipData dragData = new ClipData((CharSequence) view.getTag(), new String[] { ClipDescription.MIMETYPE_TEXT_PLAIN }, itemSchedule);
+        // Instantiate the drag shadow builder.
+        View.DragShadowBuilder dragShadow = new View.DragShadowBuilder(view);
+
+        // Start the drag.
+        view.startDrag(dragData, dragShadow, view, 0);
+
+        // Indicate that the long-click was handled.
+        return true;
+    }
+
+
+    @Override
+    public boolean onDrag(View view, DragEvent dragEvent) {
+        int action = dragEvent.getAction();
+        switch (action) {
+            case DragEvent.ACTION_DRAG_STARTED:
+                // Determines if this View can accept the dragged data.
+                if (dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    // Returns true to indicate that the View can accept the dragged data.
+                    return true;
+
+                }
+                // Returns false to indicate that, during the current drag and drop operation,
+                // this View will not receive events again until ACTION_DRAG_ENDED is sent.
+                return false;
+
+            case DragEvent.ACTION_DRAG_ENTERED:
+
+                // Applies a green tint to the View.
+                ((ImageView)view).setColorFilter(Color.GRAY);
+
+                // Invalidates the view to force a redraw in the new tint.
+                view.invalidate();
+
+                // Returns true; the value is ignored.
+                return true;
+
+            case DragEvent.ACTION_DRAG_LOCATION:
+
+                // Ignore the event.
+                return true;
+
+            case DragEvent.ACTION_DRAG_EXITED:
+
+                // Resets the color tint to blue.
+                ((ImageView)view).clearColorFilter();
+
+                // Invalidates the view to force a redraw in the new tint.
+                view.invalidate();
+
+                // Returns true; the value is ignored.
+                return true;
+
+            case DragEvent.ACTION_DROP:
+
+                // Gets the item containing the dragged data.
+                ClipData.Item itemSchedule = dragEvent.getClipData().getItemAt(0);
+
+                // Gets the text data from the item.
+                CharSequence dragData = itemSchedule.getText();
+
+                // Displays a message containing the dragged data.
+                Toast.makeText(this.getContext(), "Dragged data is " + dragData, Toast.LENGTH_LONG).show();
+
+                // Turns off any color tints.
+                ((ImageView)view).clearColorFilter();
+
+                // Invalidates the view to force a redraw.
+                view.invalidate();
+
+                ((ImageView) view).setTag(dragData);
+                ((ImageView) view).setImageResource(Integer.parseInt(dragData.toString()));
+
+                // Returns true. DragEvent.getResult() will return true.
+                return true;
+
+            case DragEvent.ACTION_DRAG_ENDED:
+
+                // Turns off any color tinting.
+                ((ImageView)view).clearColorFilter();
+
+                // Invalidates the view to force a redraw.
+                view.invalidate();
+
+                // Does a getResult(), and displays what happened.
+                if (dragEvent.getResult()) {
+                    Toast.makeText(this.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this.getContext(), "The drop didn't work.", Toast.LENGTH_LONG).show();
+                }
+
+                // Returns true; the value is ignored.
+                return true;
+
+            // An unknown action type was received.
+            default:
+                Log.e("DragDrop Example","Unknown action type received by View.OnDragListener.");
+                break;
+        }
         return false;
     }
 

@@ -30,7 +30,7 @@ public class ScheduleBoardController {
     public void dataInitialize() {
         listActionSchedule = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
-            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right, R.drawable.learning_01));
+            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right, R.drawable.work_out_01));
         }
     }
 
