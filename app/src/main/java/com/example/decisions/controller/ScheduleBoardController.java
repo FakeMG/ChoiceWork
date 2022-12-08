@@ -3,6 +3,7 @@ package com.example.decisions.controller;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,29 @@ public class ScheduleBoardController {
                 scheduleBoardIv.setImageResource(scheduleBoardModel.getResourceImage());
             }
         }
+    }
+
+    public void setOnClickEditTitle(TextView nameScheduleActivity, EditText editNameScheduleActivity, ImageView editNameScheduleActivityMode) {
+        editNameScheduleActivityMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editNameScheduleActivity.getVisibility() == View.INVISIBLE) {
+                    editNameScheduleActivity.setText(nameScheduleActivity.getText());
+                    nameScheduleActivity.setVisibility(View.INVISIBLE);
+                    editNameScheduleActivity.setVisibility(View.VISIBLE);
+
+                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_done);
+
+                }
+                else {
+                    nameScheduleActivity.setText(editNameScheduleActivity.getText());
+                    nameScheduleActivity.setVisibility(View.VISIBLE);
+                    editNameScheduleActivity.setVisibility(View.INVISIBLE);
+
+                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_edit);
+                }
+            }
+        });
     }
 
     public View getView() {

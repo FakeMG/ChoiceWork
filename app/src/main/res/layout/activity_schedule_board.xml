@@ -23,13 +23,39 @@
             android:contentDescription="@string/thumbnail"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/schedule_name_activity"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/schedule_name_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/schedule_edit_name_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/edit_schedule_name_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                app:srcCompat="@drawable/ic_baseline_edit" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView

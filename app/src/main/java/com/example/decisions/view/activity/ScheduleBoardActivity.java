@@ -6,6 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.decisions.R;
 import com.example.decisions.controller.ScheduleBoardController;
@@ -30,6 +34,12 @@ public class ScheduleBoardActivity extends AppCompatActivity implements IReplace
 
         ScheduleBoardFragment scheduleBoardFragment = new ScheduleBoardFragment();
         scheduleBoardFragment.setArguments(bundle);
+
+        TextView nameScheduleActivity = findViewById(R.id.schedule_name_activity);
+        EditText editNameScheduleActivity = findViewById(R.id.schedule_edit_name_activity);
+        ImageView editNameScheduleActivityMode = findViewById(R.id.edit_schedule_name_activity);
+
+        scheduleBoardController.setOnClickEditTitle(nameScheduleActivity, editNameScheduleActivity, editNameScheduleActivityMode);
 
         replaceFragment(R.id.fragment_schedule_board, scheduleBoardFragment);
     }
