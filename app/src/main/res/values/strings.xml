@@ -12,4 +12,5 @@
     <string name="menu_library_icon">Library</string>
     <string name="thumbnail">thumbnail</string>
     <string name="list_schedule">List Schedule action</string>
+    <string name="add_item">Add</string>
 </resources>
