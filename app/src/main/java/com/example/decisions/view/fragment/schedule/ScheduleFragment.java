@@ -14,8 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.decisions.R;
 import com.example.decisions.controller.ScheduleFragmentController;
-import com.example.decisions.model.ScheduleBoardModel;
-import com.example.decisions.view.activity.MainActivity;
+import com.example.decisions.model.schedule.ScheduleBoardModel;
 import com.example.decisions.view.adapter.ScheduleFragmentAdapter;
 import com.example.decisions.controller.system.IClickScheduleBoard;
 

@@ -8,9 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.decisions.R;
-import com.example.decisions.model.ScheduleActionModel;
-import com.example.decisions.model.ScheduleBoardModel;
-import com.example.decisions.view.adapter.ScheduleBoardAdapter;
+import com.example.decisions.model.schedule.ScheduleActionModel;
+import com.example.decisions.model.schedule.ScheduleBoardModel;
 import com.example.decisions.view.fragment.schedule.ScheduleBoardFragment;
 
 import java.util.ArrayList;

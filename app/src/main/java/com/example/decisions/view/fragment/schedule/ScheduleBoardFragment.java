@@ -14,18 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.decisions.R;
 import com.example.decisions.controller.ScheduleBoardController;
-import com.example.decisions.model.ScheduleActionModel;
-import com.example.decisions.model.ScheduleBoardModel;
-import com.example.decisions.view.activity.MainActivity;
+import com.example.decisions.model.schedule.ScheduleActionModel;
 import com.example.decisions.view.adapter.ScheduleBoardAdapter;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;

@@ -4,7 +4,6 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.graphics.Color;
-import android.media.Image;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.decisions.R;
-import com.example.decisions.model.ScheduleActionModel;
+import com.example.decisions.model.schedule.ScheduleActionModel;
 
 import java.util.ArrayList;
 

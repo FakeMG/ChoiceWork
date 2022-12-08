@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.decisions.R;
-import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.model.schedule.ScheduleBoardModel;
 import com.example.decisions.view.activity.ScheduleBoardActivity;
 
 import java.util.ArrayList;
