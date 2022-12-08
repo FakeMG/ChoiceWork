@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.example.decisions.R;
 import com.example.decisions.model.ScheduleActionModel;
 import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.view.adapter.ScheduleBoardAdapter;
+import com.example.decisions.view.fragment.schedule.ScheduleBoardFragment;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,7 @@ public class ScheduleBoardController {
         }
     }
 
-    public void setData() {
+    public void setHeaderData() {
         if (bundle != null) {
             TextView scheduleBoardTv = view.findViewById(R.id.schedule_name_activity);
             ImageView scheduleBoardIv = view.findViewById(R.id.schedule_img_activity);
@@ -45,6 +47,12 @@ public class ScheduleBoardController {
                 scheduleBoardIv.setImageResource(scheduleBoardModel.getResourceImage());
             }
         }
+    }
+
+    private void AddScheduleActivity(ScheduleBoardFragment scheduleBoardFragment) {
+        int pos = scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().size();
+        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right, R.drawable.work_out_01));
+        scheduleBoardFragment.scheduleBoardAdapter.notifyDataSetChanged();
     }
 
     public void setOnClickEditTitle(TextView nameScheduleActivity, EditText editNameScheduleActivity, ImageView editNameScheduleActivityMode) {
@@ -66,6 +74,15 @@ public class ScheduleBoardController {
 
                     editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_edit);
                 }
+            }
+        });
+    }
+
+    public void setOnClickAddScheduleActivity(TextView addScheduleActivity, ScheduleBoardFragment scheduleBoardFragment) {
+        addScheduleActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddScheduleActivity(scheduleBoardFragment);
             }
         });
     }

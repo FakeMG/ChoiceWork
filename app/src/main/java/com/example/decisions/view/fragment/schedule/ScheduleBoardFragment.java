@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.decisions.R;
 import com.example.decisions.controller.ScheduleBoardController;
@@ -43,6 +44,7 @@ public class ScheduleBoardFragment extends Fragment {
 
     private RecyclerView rcv_schedule_action;
     private ScheduleBoardController scheduleBoardController;
+    public ScheduleBoardAdapter scheduleBoardAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -107,7 +109,7 @@ public class ScheduleBoardFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcv_schedule_action.setLayoutManager(linearLayoutManager);
 
-        ScheduleBoardAdapter scheduleBoardAdapter = new ScheduleBoardAdapter(getContext(), listActionSchedule);
+        scheduleBoardAdapter = new ScheduleBoardAdapter(getContext(), listActionSchedule);
         rcv_schedule_action.setAdapter(scheduleBoardAdapter);
         scheduleBoardAdapter.notifyDataSetChanged();
 
@@ -130,6 +132,7 @@ public class ScheduleBoardFragment extends Fragment {
                 int positionItem = viewHolder.getAdapterPosition();
                 deletedItem[0] = listActionSchedule.get(positionItem);
                 listActionSchedule.remove(positionItem);
+                scheduleBoardAdapter.notifyItemRemoved(positionItem);
                 Snackbar.make(rcv_schedule_action, deletedItem[0].getName(), Snackbar.LENGTH_LONG)
                         .setAction("Undo", new View.OnClickListener() {
                             @Override
@@ -138,7 +141,6 @@ public class ScheduleBoardFragment extends Fragment {
                                 scheduleBoardAdapter.notifyItemInserted(positionItem);
                             }
                         }).show();
-                scheduleBoardAdapter.notifyDataSetChanged();
             }
 
             @Override

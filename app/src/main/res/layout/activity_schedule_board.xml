@@ -56,6 +56,14 @@
                 app:srcCompat="@drawable/ic_baseline_edit" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/add_schedule_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/add_item"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
