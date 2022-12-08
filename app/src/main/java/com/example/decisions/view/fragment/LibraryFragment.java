@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,17 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.decisions.R;
+import com.example.decisions.database.Task;
+import com.example.decisions.viewModel.LibraryFragmentViewModel;
 
 public class LibraryFragment extends Fragment {
 
     private ImageView imgView;
+    private Button btnUpload;
+    private LibraryFragmentViewModel viewModel;
 
     public LibraryFragment() {
         // Required empty public constructor
@@ -39,9 +45,18 @@ public class LibraryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        viewModel = new ViewModelProvider(this).get(LibraryFragmentViewModel.class);
         imgView = view.findViewById(R.id.iv_upload);
+        imgView.setImageURI(viewModel.getImgURI());
+        btnUpload = view.findViewById(R.id.btn_upload);
 
-        Button btnUpload = view.findViewById(R.id.btn_upload);
+        viewModel.getAllTasks().observe(getViewLifecycleOwner(), tasks -> {
+            for (Task task :
+                    tasks) {
+                Log.d("DB", task.name);
+            }
+        });
+
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +74,8 @@ public class LibraryFragment extends Fragment {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        imgView.setImageURI(data.getData());
+                        viewModel.setImgURI(data.getData());
+                        imgView.setImageURI(viewModel.getImgURI());
                     }
                 }
             });
