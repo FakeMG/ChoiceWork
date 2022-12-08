@@ -1,9 +1,11 @@
 package com.example.decisions.view.fragment.schedule;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,11 +18,16 @@ import android.view.ViewGroup;
 import com.example.decisions.R;
 import com.example.decisions.controller.ScheduleBoardController;
 import com.example.decisions.model.ScheduleActionModel;
+import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.view.activity.MainActivity;
 import com.example.decisions.view.adapter.ScheduleBoardAdapter;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -86,12 +93,17 @@ public class ScheduleBoardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // init controller
         scheduleBoardController = new ScheduleBoardController(getContext());
 
+        // create fake data
         scheduleBoardController.dataInitialize();
         ArrayList<ScheduleActionModel> listActionSchedule = scheduleBoardController.getListActionSchedule();
 
+        // get RecyclerView
         rcv_schedule_action = view.findViewById(R.id.rcv_schedule_action);
+
+        // set up linear layout
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcv_schedule_action.setLayoutManager(linearLayoutManager);
 
@@ -99,7 +111,9 @@ public class ScheduleBoardFragment extends Fragment {
         rcv_schedule_action.setAdapter(scheduleBoardAdapter);
         scheduleBoardAdapter.notifyDataSetChanged();
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
+        final ScheduleActionModel[] deletedItem = {null};
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder scheduleActionDragged, @NonNull RecyclerView.ViewHolder target) {
                 int positionDragged = scheduleActionDragged.getAdapterPosition();
@@ -113,7 +127,28 @@ public class ScheduleBoardFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int positionItem = viewHolder.getAdapterPosition();
+                deletedItem[0] = listActionSchedule.get(positionItem);
+                listActionSchedule.remove(positionItem);
+                Snackbar.make(rcv_schedule_action, deletedItem[0].getName(), Snackbar.LENGTH_LONG)
+                        .setAction("Undo", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                listActionSchedule.add(positionItem, deletedItem[0]);
+                                scheduleBoardAdapter.notifyItemInserted(positionItem);
+                            }
+                        }).show();
+                scheduleBoardAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeLeftBackgroundColor(ContextCompat.getColor(getContext(), R.color.red))
+                        .addSwipeLeftActionIcon(R.drawable.ic_baseline_delete)
+                        .create()
+                        .decorate();
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         });
         itemTouchHelper.attachToRecyclerView(rcv_schedule_action);
