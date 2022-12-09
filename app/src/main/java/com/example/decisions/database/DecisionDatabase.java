@@ -9,9 +9,9 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Task.class}, version = 1, exportSchema = false)
+@Database(entities = {Task.class, WaitingBoard.class, FeelingBoard.class, ScheduleBoard.class, ScheduleBoardWithTasks.class}, version = 1, exportSchema = false)
 public abstract class DecisionDatabase extends RoomDatabase {
-    public abstract TaskDao taskDao();
+    public abstract DecisionDao decisionDao();
 
     private static volatile DecisionDatabase INSTANCE = null;
     private static final int NUMBER_OF_THREADS = 4;
