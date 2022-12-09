@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.decisions.R;
 import com.example.decisions.model.WaitingBoardModel;
@@ -15,7 +19,8 @@ import com.example.decisions.model.WaitingBoardModel;
 import java.util.Locale;
 
 public class WaitingBoardActivity extends AppCompatActivity {
-    private static final long START_TIME_IN_MILLIS = 600000;
+    private EditText editTimerInput;
+    private TextView editTimer;
 
     private ImageView waitingBoardIv;
 
@@ -26,7 +31,8 @@ public class WaitingBoardActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private boolean timerRunning;
 
-    private long timeLeftInMillis = START_TIME_IN_MILLIS;
+    private long startTimeInMillis = 600000;
+    private long timeLeftInMillis = startTimeInMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +49,39 @@ public class WaitingBoardActivity extends AppCompatActivity {
         WaitingBoardModel waitingBoardModel = (WaitingBoardModel) bundle.get("waiting_board");
         waitingBoardIv.setImageResource(waitingBoardModel.getResourceImage());
 
+        editTimerInput = findViewById(R.id.edit_timer_input);
+        editTimer = findViewById(R.id.edit_timer);
+
         textViewCountDown = findViewById(R.id.text_view_countdown);
         buttonStartPause = findViewById(R.id.button_start_pause);
         buttonReset = findViewById(R.id.button_reset);
+
+        editTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editTimer.getText().toString().equals("Edit timer")) {
+                    editTimerInput.setVisibility(View.VISIBLE);
+                    editTimer.setText("Save timer");
+                }
+                else {
+                    String input = editTimerInput.getText().toString();
+                    if (input.length() == 0) {
+                        Toast.makeText(WaitingBoardActivity.this, "Field can't be empty", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    long millisInput = Long.parseLong(input) * 60000;
+                    if (millisInput == 0) {
+                        Toast.makeText(WaitingBoardActivity.this, "Please enter a positive number", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    setTime(millisInput);
+                    editTimerInput.setText("");
+                    editTimer.setText("Edit timer");
+                    //closeKeyboard();
+                }
+            }
+        });
 
         buttonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +105,19 @@ public class WaitingBoardActivity extends AppCompatActivity {
         updateCountDownText();
     }
 
+    /*private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }*/
+
+    private void setTime(long millis) {
+        startTimeInMillis = millis;
+        resetTimer();
+    }
+
     private void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
@@ -87,30 +136,47 @@ public class WaitingBoardActivity extends AppCompatActivity {
         }.start();
 
         timerRunning = true;
+        resetEditTimer();
+        editTimer.setEnabled(false);
         buttonStartPause.setText("Pause");
         buttonReset.setVisibility(View.INVISIBLE);
     }
 
     private void updateCountDownText() {
-        int minutes = (int) (timeLeftInMillis / 1000) / 60;
+        int hours = (int) (timeLeftInMillis / 1000) / 3600;
+        int minutes = (int) ((timeLeftInMillis / 1000) % 3600) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
 
-        String timeLeft = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        String timeLeft;
+        if (hours > 0) {
+            timeLeft = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds);
+        }
+        else {
+            timeLeft = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        }
         textViewCountDown.setText(timeLeft);
     }
 
     private void pauseTimer() {
         countDownTimer.cancel();
         timerRunning = false;
+        editTimer.setEnabled(true);
         buttonStartPause.setText("Start");
         buttonReset.setVisibility(View.VISIBLE);
     }
 
     private void resetTimer() {
-        timeLeftInMillis = START_TIME_IN_MILLIS;
+        timeLeftInMillis = startTimeInMillis;
+        resetEditTimer();
         updateCountDownText();
         buttonStartPause.setVisibility(View.VISIBLE);
         buttonReset.setVisibility(View.INVISIBLE);
+    }
+
+    private void resetEditTimer() {
+        editTimerInput.setVisibility(View.INVISIBLE);
+        editTimer.setText("Edit timer");
+        editTimer.setEnabled(true);
     }
 
 }
