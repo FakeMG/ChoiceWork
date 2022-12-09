@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.decisions.R;
 import com.example.decisions.database.Task;
+import com.example.decisions.database.WaitingBoard;
 import com.example.decisions.viewModel.LibraryFragmentViewModel;
 
 public class LibraryFragment extends Fragment {
@@ -50,11 +51,16 @@ public class LibraryFragment extends Fragment {
         imgView.setImageURI(viewModel.getImgURI());
         btnUpload = view.findViewById(R.id.btn_upload);
 
+
+        for (int i = 0; i < 3; i++) {
+            Task task = new Task("test" + i, "xyz");
+            viewModel.insertTask(task);
+        }
+//        WaitingBoard board = new WaitingBoard("Wait for launch", (int)1, (int)5, (int)2, (int)3);
+//        viewModel.insertWaitingBoard(board);
+
         viewModel.getAllTasks().observe(getViewLifecycleOwner(), tasks -> {
-            for (Task task :
-                    tasks) {
-                Log.d("DB", task.name);
-            }
+
         });
 
         btnUpload.setOnClickListener(new View.OnClickListener() {

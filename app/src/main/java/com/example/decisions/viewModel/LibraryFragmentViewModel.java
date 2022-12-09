@@ -8,18 +8,19 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.decisions.database.Task;
-import com.example.decisions.database.TaskRepository;
+import com.example.decisions.database.DecisionRepository;
+import com.example.decisions.database.WaitingBoard;
 
 import java.util.List;
 
 public class LibraryFragmentViewModel extends AndroidViewModel {
 
-    private TaskRepository mRepository;
+    private DecisionRepository mRepository;
     private final LiveData<List<Task>> mAllTasks;
 
     public LibraryFragmentViewModel(@NonNull Application application) {
         super(application);
-        mRepository = new TaskRepository(application);
+        mRepository = new DecisionRepository(application);
         mAllTasks = mRepository.getAllTasks();
 
     }
@@ -28,8 +29,12 @@ public class LibraryFragmentViewModel extends AndroidViewModel {
         return mAllTasks;
     }
 
-    public void insert(Task task) {
-        mRepository.insert(task);
+    public void insertTask(Task task) {
+        mRepository.insertTask(task);
+    }
+
+    public void insertWaitingBoard(WaitingBoard waitingBoard) {
+        mRepository.insertWaitingBoard(waitingBoard);
     }
 
     //test methods
