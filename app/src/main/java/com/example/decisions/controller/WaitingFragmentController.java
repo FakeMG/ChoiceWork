@@ -1,10 +1,14 @@
 package com.example.decisions.controller;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 
 import com.example.decisions.R;
 import com.example.decisions.model.WaitingBoardModel;
 import com.example.decisions.model.schedule.ScheduleBoardModel;
+import com.example.decisions.view.activity.ScheduleBoardActivity;
+import com.example.decisions.view.activity.WaitingBoardActivity;
 
 import java.util.ArrayList;
 
@@ -16,6 +20,16 @@ public class WaitingFragmentController {
         this.context = context;
         this.listWaiting = new ArrayList<>();
         dataInitialize();
+    }
+
+    public void onClickGoToBoard(WaitingBoardModel waitingBoardModel) {
+        Bundle bundleWaitingBoard = new Bundle();
+        bundleWaitingBoard.putSerializable("waiting_board", waitingBoardModel);
+        Intent intent = new Intent(getContext(), WaitingBoardActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("waiting_board", waitingBoardModel);
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
     }
 
     private ArrayList<WaitingBoardModel> dataInitialize() {

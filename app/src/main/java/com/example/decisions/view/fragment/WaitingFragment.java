@@ -92,7 +92,7 @@ public class WaitingFragment extends Fragment {
         WaitingFragmentAdapter waitingFragmentAdapter = new WaitingFragmentAdapter(getContext(), listWaiting, new IClickWaitingBoard() {
             @Override
             public void onClickWaitingBoard(WaitingBoardModel waitingBoardModel) {
-
+                waitingFragmentController.onClickGoToBoard(waitingBoardModel);
             }
         });
 
