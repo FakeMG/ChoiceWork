@@ -22,6 +22,38 @@ public class DecisionRepository {
         return mAllTasks;
     }
 
+    public LiveData<Task> getTaskWithId(int taskId) {
+        return mDecisionDao.getTaskWithId(taskId);
+    }
+
+    public LiveData<List<ScheduleBoard>> getScheduleBoard() {
+        return mDecisionDao.getAllScheduleBoards();
+    }
+
+    public LiveData<ScheduleBoard> getScheduleBoardWithId(int boardId) {
+        return mDecisionDao.getScheduleBoardWithId(boardId);
+    }
+
+    public LiveData<List<Task>> getAllTasksOfAScheduleBoard(int boardId) {
+        return mDecisionDao.getAllTasksOfAScheduleBoard(boardId);
+    }
+
+    public LiveData<List<WaitingBoard>> getWaitingBoard() {
+        return mDecisionDao.getAllWaitingBoards();
+    }
+
+    public LiveData<WaitingBoard> getWaitingBoardWithId(int boardId) {
+        return mDecisionDao.getWaitingBoardWithId(boardId);
+    }
+
+    public LiveData<List<FeelingBoard>> getFeelingBoard() {
+        return mDecisionDao.getAllFeelingBoards();
+    }
+
+    public LiveData<FeelingBoard> getFeelingBoardWithId(int boardId) {
+        return mDecisionDao.getFeelingBoardWithId(boardId);
+    }
+
     public void insertTask(Task task) {
         DecisionDatabase.databaseWriteExecutor.execute(() -> {
             mDecisionDao.insertTask(task);
