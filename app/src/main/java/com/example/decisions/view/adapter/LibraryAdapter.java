@@ -1,7 +1,6 @@
 package com.example.decisions.view.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.example.decisions.R;
 import com.example.decisions.database.Task;
 
 import java.util.Collections;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryViewHolder> {
@@ -35,7 +33,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
     @Override
     public void onBindViewHolder(@NonNull LibraryViewHolder holder, int position) {
         holder.taskTitle.setText(taskArrayList.get(position).name);
-        holder.taskImg.setImageBitmap(ImageSaver.load(context, taskArrayList.get(position).picturePath));
+        holder.taskImg.setImageBitmap(ImageSaver.load(context, taskArrayList.get(position).fileName));
     }
 
     @Override

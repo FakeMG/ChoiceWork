@@ -23,6 +23,7 @@
         </activity>
         <activity
             android:name=".view.activity.AddTaskActivity"
+            android:parentActivityName=".view.activity.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

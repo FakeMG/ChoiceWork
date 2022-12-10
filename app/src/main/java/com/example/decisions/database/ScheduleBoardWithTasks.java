@@ -25,6 +25,9 @@ class ScheduleBoardWithTasks {
     @ColumnInfo(name = "task_id")
     public int taskId;
 
+    @ColumnInfo(name = "status")
+    public boolean status = false;
+
     public ScheduleBoardWithTasks(int scheduleBoardId, int taskId) {
         this.scheduleBoardId = scheduleBoardId;
         this.taskId = taskId;

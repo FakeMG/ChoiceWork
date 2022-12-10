@@ -23,13 +23,13 @@ public class ImageSaver {
     private static final String DIRECTORY_NAME = "images";
     private static boolean external;
 
-    public static void saveFromUri(Context context, Uri uri) throws FileNotFoundException {
+    public static String saveFromUri(Context context, Uri uri) throws FileNotFoundException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         Bitmap imgBitmap = BitmapFactory.decodeStream(inputStream);
-        saveFromBitmap(context, imgBitmap);
+        return saveFromBitmap(context, imgBitmap);
     }
 
-    public static void saveFromBitmap(Context context, Bitmap bitmapImage) {
+    public static String saveFromBitmap(Context context, Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
@@ -37,6 +37,7 @@ public class ImageSaver {
 
             fileOutputStream = new FileOutputStream(createFile(context, timeStamp));
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+            return timeStamp;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -48,6 +49,7 @@ public class ImageSaver {
                 e.printStackTrace();
             }
         }
+        return "";
     }
 
     @NonNull
