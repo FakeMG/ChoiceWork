@@ -80,7 +80,7 @@
             android:layout_marginTop="8dp">
 
         <ImageView
-            android:id="@+id/waiting_img_activity"
+            android:id="@+id/feeling_img_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/thumbnail"

@@ -94,9 +94,9 @@ public class WaitingFragmentAdapter extends RecyclerView.Adapter<WaitingFragment
         public WaitingViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            cardViewWaiting = itemView.findViewById(R.id.card_waiting);
-            nameWaiting = itemView.findViewById(R.id.name_waiting);
-            imgWaiting = itemView.findViewById(R.id.img_waiting);
+            cardViewWaiting = itemView.findViewById(R.id.card_feeling);
+            nameWaiting = itemView.findViewById(R.id.name_feeling);
+            imgWaiting = itemView.findViewById(R.id.img_feeling);
         }
     }
 
