@@ -22,7 +22,7 @@ public class DecisionRepository {
         return mAllTasks;
     }
 
-    public LiveData<Task> getTaskWithId(int taskId) {
+    public LiveData<List<Task>> getTaskWithId(int taskId) {
         return mDecisionDao.getTaskWithId(taskId);
     }
 
@@ -30,7 +30,7 @@ public class DecisionRepository {
         return mDecisionDao.getAllScheduleBoards();
     }
 
-    public LiveData<ScheduleBoard> getScheduleBoardWithId(int boardId) {
+    public LiveData<List<ScheduleBoard>> getScheduleBoardWithId(int boardId) {
         return mDecisionDao.getScheduleBoardWithId(boardId);
     }
 
@@ -42,7 +42,7 @@ public class DecisionRepository {
         return mDecisionDao.getAllWaitingBoards();
     }
 
-    public LiveData<WaitingBoard> getWaitingBoardWithId(int boardId) {
+    public LiveData<List<WaitingBoard>> getWaitingBoardWithId(int boardId) {
         return mDecisionDao.getWaitingBoardWithId(boardId);
     }
 
@@ -50,7 +50,7 @@ public class DecisionRepository {
         return mDecisionDao.getAllFeelingBoards();
     }
 
-    public LiveData<FeelingBoard> getFeelingBoardWithId(int boardId) {
+    public LiveData<List<FeelingBoard>> getFeelingBoardWithId(int boardId) {
         return mDecisionDao.getFeelingBoardWithId(boardId);
     }
 
