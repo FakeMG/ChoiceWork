@@ -30,6 +30,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".view.activity.FeelingBoardActivity"
+
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.activity.WaitingBoardActivity"
             android:exported="false">
             <meta-data

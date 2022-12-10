@@ -26,7 +26,7 @@ public class WaitingBoardActivity extends AppCompatActivity {
             return;
         }
 
-        waitingBoardIv = findViewById(R.id.waiting_img_activity);
+        waitingBoardIv = findViewById(R.id.feeling_img_activity);
         WaitingBoardModel waitingBoardModel = (WaitingBoardModel) bundle.get("waiting_board");
         waitingBoardIv.setImageResource(waitingBoardModel.getResourceImage());
 
