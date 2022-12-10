@@ -38,9 +38,9 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        uploadImgBtn = findViewById(R.id.btn_uploadImg);
+        uploadImgBtn = findViewById(R.id.btn_save_task);
         imgView = findViewById(R.id.imageView);
-        textView = findViewById(R.id.et_title);
+        textView = findViewById(R.id.et_task_title);
 
         uploadImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override

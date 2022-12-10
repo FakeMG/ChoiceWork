@@ -1,8 +1,10 @@
 package com.example.decisions.view.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton addBtn;
+    private Dialog addTaskDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +56,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        addTaskDialog = new Dialog(this);
 
         addBtn = findViewById(R.id.floatingActionButton);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent moveToAddActivity = new Intent(getBaseContext(), AddTaskActivity.class);
-                startActivity(moveToAddActivity);
+                addTaskDialog.setContentView(R.layout.activity_add_task);
+
+                Button cancelBtn = addTaskDialog.findViewById(R.id.btn_cancel_task);
+                Button saveBtn = addTaskDialog.findViewById(R.id.btn_save_task);
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addTaskDialog.dismiss();
+                    }
+                });
+                addTaskDialog.show();
             }
         });
     }
