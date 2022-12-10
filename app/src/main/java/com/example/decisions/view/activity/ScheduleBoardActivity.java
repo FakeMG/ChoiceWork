@@ -42,7 +42,7 @@ public class ScheduleBoardActivity extends AppCompatActivity implements IReplace
         scheduleBoardController.setOnClickEditTitle(nameScheduleActivity, editNameScheduleActivity, editNameScheduleActivityMode);
         scheduleBoardController.setOnClickAddScheduleActivity(addScheduleActivity, scheduleBoardFragment);
 
-        replaceFragment(R.id.fragment_schedule_board, scheduleBoardFragment);
+        replaceFragment(R.id.schedule_board_fragment_container_view, scheduleBoardFragment);
     }
 
     @Override

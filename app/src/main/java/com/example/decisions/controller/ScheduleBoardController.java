@@ -32,7 +32,7 @@ public class ScheduleBoardController {
     public void dataInitialize() {
         listActionSchedule = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
-            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right, R.drawable.work_out_01));
+            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right_24, R.drawable.work_out_01));
         }
     }
 
@@ -50,7 +50,7 @@ public class ScheduleBoardController {
 
     private void AddScheduleActivity(ScheduleBoardFragment scheduleBoardFragment) {
         int pos = scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().size();
-        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right, R.drawable.work_out_01));
+        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right_24, R.drawable.work_out_01));
         scheduleBoardFragment.scheduleBoardAdapter.notifyDataSetChanged();
     }
 
@@ -63,7 +63,7 @@ public class ScheduleBoardController {
                     nameScheduleActivity.setVisibility(View.INVISIBLE);
                     editNameScheduleActivity.setVisibility(View.VISIBLE);
 
-                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_done);
+                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_done_24);
 
                 }
                 else {
@@ -71,7 +71,7 @@ public class ScheduleBoardController {
                     nameScheduleActivity.setVisibility(View.VISIBLE);
                     editNameScheduleActivity.setVisibility(View.INVISIBLE);
 
-                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_edit);
+                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_edit_24);
                 }
             }
         });
