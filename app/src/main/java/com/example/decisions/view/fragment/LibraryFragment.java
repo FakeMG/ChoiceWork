@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.decisions.R;
 import com.example.decisions.view.adapter.LibraryAdapter;
+import com.example.decisions.view.decorator.MarginItemDecorator;
 import com.example.decisions.viewModel.LibraryFragmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -42,19 +43,11 @@ public class LibraryFragment extends Fragment {
         LibraryAdapter adapter = new LibraryAdapter();
         rcv_library.setAdapter(adapter);
         rcv_library.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcv_library.addItemDecoration(new MarginItemDecorator(getResources().getDimensionPixelSize(R.dimen.default_margin)));
 
         viewModel = new ViewModelProvider(this).get(LibraryFragmentViewModel.class);
         viewModel.getAllTasks().observe(getViewLifecycleOwner(), tasks -> {
             adapter.setData(tasks);
         });
-
-//        addBtn = view.findViewById(R.id.floatingActionButton);
-//        addBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent moveToAddActivity = new Intent(getActivity(), AddTaskActivity.class);
-//                startActivity(moveToAddActivity);
-//            }
-//        });
     }
 }
