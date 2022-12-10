@@ -1,6 +1,8 @@
 package com.example.decisions.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +15,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.decisions.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FloatingActionButton addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
                 if (navDestination.getId() == R.id.library) {
                     getSupportActionBar().setTitle("Library");
                 }
+            }
+        });
+
+
+        addBtn = findViewById(R.id.floatingActionButton);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent moveToAddActivity = new Intent(getBaseContext(), AddTaskActivity.class);
+                startActivity(moveToAddActivity);
             }
         });
     }

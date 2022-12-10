@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -15,7 +18,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.decisions.ImageSaver;
 import com.example.decisions.R;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -48,7 +55,14 @@ public class AddTaskActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        imgView.setImageURI(data.getData());
+                        Uri imgUri = data.getData();
+                        imgView.setImageURI(imgUri);
+
+                        try {
+                            ImageSaver.saveFromUri(getBaseContext(), imgUri);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
