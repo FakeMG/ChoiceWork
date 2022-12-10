@@ -13,11 +13,11 @@ public class Task {
     @ColumnInfo
     public String name;
 
-    @ColumnInfo(name = "picture_path")
-    public String picturePath;
+    @ColumnInfo(name = "file_name")
+    public String fileName;
 
-    public Task(String name, String picturePath) {
+    public Task(String name, String fileName) {
         this.name = name;
-        this.picturePath = picturePath;
+        this.fileName = fileName;
     }
 }
