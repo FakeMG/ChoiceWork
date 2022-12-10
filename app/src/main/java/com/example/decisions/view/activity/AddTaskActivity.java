@@ -1,15 +1,7 @@
 package com.example.decisions.view.activity;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,17 +10,28 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.decisions.ImageSaver;
 import com.example.decisions.R;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AddTaskActivity extends AppCompatActivity {
 
     private Button uploadImgBtn;
     private ImageView imgView;
     private TextView textView;
+
+    private static final int NUMBER_OF_THREADS = 4;
+    static final ExecutorService writeExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +61,13 @@ public class AddTaskActivity extends AppCompatActivity {
                         Uri imgUri = data.getData();
                         imgView.setImageURI(imgUri);
 
-                        try {
-                            ImageSaver.saveFromUri(getBaseContext(), imgUri);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                        writeExecutor.execute(() -> {
+                            try {
+                                ImageSaver.saveFromUri(getBaseContext(), imgUri);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        });
                     }
                 }
             });
