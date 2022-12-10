@@ -2,11 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_schedule"
+    android:id="@+id/card_waiting"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="20dp"
     android:layout_marginRight="10dp"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="12dp">
@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
-        android:background="@color/blue_edit_text">
+        android:background="@color/orange_waiting_board">
 
         <TextView
-            android:id="@+id/name_schedule"
+            android:id="@+id/name_waiting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,15 +30,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/img_schedule"
+            android:id="@+id/img_waiting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:contentDescription="@string/menu_schedule_icon"
+            android:contentDescription="@string/menu_waiting_icon"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_schedule"
+            app:layout_constraintTop_toBottomOf="@+id/name_waiting"
             app:srcCompat="@drawable/ic_launcher_background" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

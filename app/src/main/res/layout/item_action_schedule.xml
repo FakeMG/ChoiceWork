@@ -4,27 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:background="@color/blue_row_action_schedule"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_marginBottom="8dp">
 
-    <ImageView
-        android:id="@+id/img_schedule_action"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_weight="1">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_schedule_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/double_arrow_right"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:background="@color/purple_200"
-        app:srcCompat="@drawable/ic_baseline_double_arrow_right" />
-
-    <ImageView
-        android:id="@+id/img_schedule_action_completed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_gravity="center_vertical"
+        app:srcCompat="@drawable/ic_baseline_double_arrow_32" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_schedule_action_completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@drawable/check_01" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

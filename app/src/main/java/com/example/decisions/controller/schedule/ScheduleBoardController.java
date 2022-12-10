@@ -1,4 +1,4 @@
-package com.example.decisions.controller;
+package com.example.decisions.controller.schedule;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,8 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.decisions.R;
-import com.example.decisions.model.ScheduleActionModel;
-import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.model.schedule.ScheduleActionModel;
+import com.example.decisions.model.schedule.ScheduleBoardModel;
+import com.example.decisions.view.fragment.schedule.ScheduleBoardFragment;
 
 import java.util.ArrayList;
 
@@ -31,11 +32,11 @@ public class ScheduleBoardController {
     public void dataInitialize() {
         listActionSchedule = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
-            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_right, R.drawable.work_out_01));
+            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
         }
     }
 
-    public void setData() {
+    public void setHeaderData() {
         if (bundle != null) {
             TextView scheduleBoardTv = view.findViewById(R.id.schedule_name_activity);
             ImageView scheduleBoardIv = view.findViewById(R.id.schedule_img_activity);
@@ -47,6 +48,12 @@ public class ScheduleBoardController {
         }
     }
 
+    private void AddScheduleActivity(ScheduleBoardFragment scheduleBoardFragment) {
+        int pos = scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().size();
+        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
+        scheduleBoardFragment.scheduleBoardAdapter.notifyDataSetChanged();
+    }
+
     public void setOnClickEditTitle(TextView nameScheduleActivity, EditText editNameScheduleActivity, ImageView editNameScheduleActivityMode) {
         editNameScheduleActivityMode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +63,7 @@ public class ScheduleBoardController {
                     nameScheduleActivity.setVisibility(View.INVISIBLE);
                     editNameScheduleActivity.setVisibility(View.VISIBLE);
 
-                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_done);
+                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_done_24);
 
                 }
                 else {
@@ -64,8 +71,17 @@ public class ScheduleBoardController {
                     nameScheduleActivity.setVisibility(View.VISIBLE);
                     editNameScheduleActivity.setVisibility(View.INVISIBLE);
 
-                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_edit);
+                    editNameScheduleActivityMode.setImageResource(R.drawable.ic_baseline_edit_24);
                 }
+            }
+        });
+    }
+
+    public void setOnClickAddScheduleActivity(ImageView addScheduleActivity, ScheduleBoardFragment scheduleBoardFragment) {
+        addScheduleActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddScheduleActivity(scheduleBoardFragment);
             }
         });
     }

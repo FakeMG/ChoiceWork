@@ -1,4 +1,6 @@
-package com.example.decisions.model;
+package com.example.decisions.model.schedule;
+
+import com.example.decisions.model.ImageModel;
 
 public class ScheduleActionModel extends ImageModel {
 

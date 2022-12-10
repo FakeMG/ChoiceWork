@@ -1,10 +1,9 @@
-package com.example.decisions.view.adapter;
+package com.example.decisions.view.adapter.schedule;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.graphics.Color;
-import android.media.Image;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.decisions.R;
-import com.example.decisions.model.ScheduleActionModel;
+import com.example.decisions.model.schedule.ScheduleActionModel;
 
 import java.util.ArrayList;
 
@@ -48,11 +47,10 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
         ImageView imgScheduleAction = view.findViewById(R.id.img_schedule_action);
         ImageView imgScheduleActionCompleted = view.findViewById(R.id.img_schedule_action_completed);
 
-        imgScheduleAction.setOnDragListener(this);
         imgScheduleAction.setOnLongClickListener(this);
+        imgScheduleAction.setOnDragListener(this);
 
         imgScheduleActionCompleted.setOnDragListener(this);
-        imgScheduleActionCompleted.setOnLongClickListener(this);
 
         return new ScheduleBoardHolder(view);
     }
@@ -114,6 +112,12 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
 
         // Start the drag.
         view.startDrag(dragData, dragShadow, view, 0);
+
+        // Hide the view
+        ((ImageView) view).setImageResource(R.drawable.done_01);
+
+        // Invalidates the view to force a redraw.
+        view.invalidate();
 
         // Indicate that the long-click was handled.
         return true;

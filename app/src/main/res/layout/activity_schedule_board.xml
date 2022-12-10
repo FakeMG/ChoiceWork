@@ -10,18 +10,36 @@
         android:id="@+id/name_schedule_board"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue_header_schedule_board"
         android:orientation="horizontal"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/schedule_img_activity"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/thumbnail"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/schedule_img_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/thumbnail"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,11 +49,14 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/schedule_name_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:padding="4dp"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <EditText
@@ -43,6 +64,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:background="@drawable/custom_edit_text_rounded"
+                    android:padding="4dp"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:visibility="invisible" />
             </RelativeLayout>
@@ -53,8 +77,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
-                app:srcCompat="@drawable/ic_baseline_edit" />
+                app:srcCompat="@drawable/ic_baseline_edit_24" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/add_schedule_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_add_24"/>
 
     </LinearLayout>
 

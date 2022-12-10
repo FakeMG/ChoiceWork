@@ -1,11 +1,11 @@
-package com.example.decisions.controller;
+package com.example.decisions.controller.schedule;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.decisions.R;
-import com.example.decisions.model.ScheduleBoardModel;
+import com.example.decisions.model.schedule.ScheduleBoardModel;
 import com.example.decisions.view.activity.ScheduleBoardActivity;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class ScheduleFragmentController {
 
     private ArrayList<ScheduleBoardModel> dataInitialize() {
         for (int i = 1; i <= 13; i++) {
-            listSchedule.add(new ScheduleBoardModel("Schedule " + i, R.drawable.learning_01));
+            listSchedule.add(new ScheduleBoardModel("Schedule " + i, R.drawable.working_out_01));
         }
 
         return listSchedule;
