@@ -94,7 +94,7 @@ public class ScheduleBoardFragment extends Fragment {
         // init controller
         scheduleBoardController = new ScheduleBoardController(getContext());
 
-        // create fake data
+        // get data
         scheduleBoardController.dataInitialize();
         ArrayList<ScheduleActionModel> listActionSchedule = scheduleBoardController.getListActionSchedule();
 

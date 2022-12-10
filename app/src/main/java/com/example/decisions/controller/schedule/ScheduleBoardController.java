@@ -1,6 +1,7 @@
 package com.example.decisions.controller.schedule;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.example.decisions.R;
 import com.example.decisions.model.schedule.ScheduleActionModel;
 import com.example.decisions.model.schedule.ScheduleBoardModel;
+import com.example.decisions.view.activity.ChooseImageActivity;
+import com.example.decisions.view.activity.ScheduleBoardActivity;
 import com.example.decisions.view.fragment.schedule.ScheduleBoardFragment;
 
 import java.util.ArrayList;
@@ -48,12 +51,6 @@ public class ScheduleBoardController {
         }
     }
 
-    private void AddScheduleActivity(ScheduleBoardFragment scheduleBoardFragment) {
-        int pos = scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().size();
-        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
-        scheduleBoardFragment.scheduleBoardAdapter.notifyDataSetChanged();
-    }
-
     public void setOnClickEditTitle(TextView nameScheduleActivity, EditText editNameScheduleActivity, ImageView editNameScheduleActivityMode) {
         editNameScheduleActivityMode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +81,15 @@ public class ScheduleBoardController {
                 AddScheduleActivity(scheduleBoardFragment);
             }
         });
+    }
+
+    private void AddScheduleActivity(ScheduleBoardFragment scheduleBoardFragment) {
+        Context context = scheduleBoardFragment.getContext();
+        Intent intent = new Intent(context, ChooseImageActivity.class);
+        context.startActivity(intent);
+        int pos = scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().size();
+        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
+        scheduleBoardFragment.scheduleBoardAdapter.notifyDataSetChanged();
     }
 
     public View getView() {

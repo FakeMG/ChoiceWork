@@ -19,4 +19,5 @@
     <string name="waiting_start">Start</string>
     <string name="waiting_reset">Reset</string>
     <string name="edit_timer">Edit timer</string>
+    <string name="choose_image_text">Choose an image</string>
 </resources>

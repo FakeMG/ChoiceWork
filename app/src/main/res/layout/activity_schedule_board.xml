@@ -89,7 +89,7 @@
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/schedule_board_fragment_container_view"
+        android:id="@+id/choose_image_fragment_container_view"
         android:name="com.example.decisions.view.fragment.schedule.ScheduleBoardFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
