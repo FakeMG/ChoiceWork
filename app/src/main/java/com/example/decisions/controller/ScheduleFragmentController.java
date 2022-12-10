@@ -32,7 +32,7 @@ public class ScheduleFragmentController {
 
     private ArrayList<ScheduleBoardModel> dataInitialize() {
         for (int i = 1; i <= 13; i++) {
-            listSchedule.add(new ScheduleBoardModel("Schedule " + i, R.drawable.learning_01));
+            listSchedule.add(new ScheduleBoardModel("Schedule " + i, R.drawable.working_out_01));
         }
 
         return listSchedule;

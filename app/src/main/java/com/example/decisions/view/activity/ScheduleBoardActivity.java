@@ -37,7 +37,7 @@ public class ScheduleBoardActivity extends AppCompatActivity implements IReplace
         TextView nameScheduleActivity = findViewById(R.id.schedule_name_activity);
         EditText editNameScheduleActivity = findViewById(R.id.schedule_edit_name_activity);
         ImageView editNameScheduleActivityMode = findViewById(R.id.edit_schedule_name_activity);
-        TextView addScheduleActivity = findViewById(R.id.add_schedule_item);
+        ImageView addScheduleActivity = findViewById(R.id.add_schedule_item);
 
         scheduleBoardController.setOnClickEditTitle(nameScheduleActivity, editNameScheduleActivity, editNameScheduleActivityMode);
         scheduleBoardController.setOnClickAddScheduleActivity(addScheduleActivity, scheduleBoardFragment);

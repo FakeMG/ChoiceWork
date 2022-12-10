@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Editable;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -138,6 +136,7 @@ public class WaitingBoardActivity extends AppCompatActivity {
         timerRunning = true;
         resetEditTimer();
         editTimer.setEnabled(false);
+        editTimer.setTextColor(getResources().getColor(R.color.gray_disabled));
         buttonStartPause.setText("Pause");
         buttonReset.setVisibility(View.INVISIBLE);
     }
@@ -161,6 +160,7 @@ public class WaitingBoardActivity extends AppCompatActivity {
         countDownTimer.cancel();
         timerRunning = false;
         editTimer.setEnabled(true);
+        editTimer.setTextColor(getResources().getColor(R.color.black));
         buttonStartPause.setText("Start");
         buttonReset.setVisibility(View.VISIBLE);
     }
@@ -177,6 +177,7 @@ public class WaitingBoardActivity extends AppCompatActivity {
         editTimerInput.setVisibility(View.INVISIBLE);
         editTimer.setText("Edit timer");
         editTimer.setEnabled(true);
+        editTimer.setTextColor(getResources().getColor(R.color.black));
     }
 
 }

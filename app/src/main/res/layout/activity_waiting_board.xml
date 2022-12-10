@@ -5,6 +5,7 @@
     android:id="@+id/layout_waiting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange_waiting_board"
     tools:context=".view.activity.WaitingBoardActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +14,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp">
 
         <EditText
             android:id="@+id/edit_timer_input"
@@ -25,6 +27,8 @@
             android:minHeight="48dp"
             android:maxLength="4"
             android:visibility="invisible"
+            android:padding="8dp"
+            android:background="@drawable/custom_edit_text_rounded"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/edit_timer"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +39,7 @@
             android:layout_height="wrap_content"
             android:text="@string/edit_timer"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:enabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,36 +62,50 @@
             android:id="@+id/text_view_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/waiting_text_subject"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="24sp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_waiting_img_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_subject"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="8dp">
 
         <ImageView
             android:id="@+id/waiting_img_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/thumbnail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_subject"
             app:srcCompat="@drawable/learning_01" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/text_view_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/waiting_text_temp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/waiting_img_activity" />
+            app:layout_constraintTop_toBottomOf="@+id/card_waiting_img_activity"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/text_view_countdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/waiting_time"
-            android:textSize="30sp"
+            android:textSize="36sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_temp" />

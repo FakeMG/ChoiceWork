@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@color/blue_row_action_schedule"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="16dp"
+    android:layout_marginBottom="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1">
 
         <androidx.cardview.widget.CardView
@@ -55,7 +57,7 @@
                 android:id="@+id/img_schedule_action_completed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@drawable/check_01" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -11,4 +11,7 @@
     <color name="blue_edit_text">#2196F3</color>
     <color name="blue_header_schedule_board">#2196F3</color>
     <color name="blue_row_action_schedule">#3F51B5</color>
+    <color name="orange_waiting_board">#FF9800</color>
+    <color name="gray_disabled">#808080</color>
+    <color name="gray_fragment">#5C5C5C</color>
 </resources>
