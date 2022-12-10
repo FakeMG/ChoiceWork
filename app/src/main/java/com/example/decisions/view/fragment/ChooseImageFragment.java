@@ -5,24 +5,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.decisions.R;
 import com.example.decisions.controller.ChooseImageController;
+import com.example.decisions.controller.system.IChooseImage;
 import com.example.decisions.model.ChooseImageModel;
+import com.example.decisions.view.activity.ChooseImageActivity;
 import com.example.decisions.view.adapter.ChooseImageAdapter;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ChooseImageFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class ChooseImageFragment extends Fragment {
 
@@ -31,43 +34,23 @@ public class ChooseImageFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
     private RecyclerView rcv_choose_image;
     private ChooseImageController chooseImageController;
     private ChooseImageAdapter chooseImageAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ImageView chosenImage;
+    private TextView chosenImageName;
+    private ImageView saveChosenImage;
 
     public ChooseImageFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChooseImageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChooseImageFragment newInstance(String param1, String param2) {
-        ChooseImageFragment fragment = new ChooseImageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public ChooseImageFragment(ImageView chosenImage, TextView chosenImageName, ImageView saveChosenImage) {
+        this.chosenImage = chosenImage;
+        this.chosenImageName = chosenImageName;
+        this.saveChosenImage = saveChosenImage;
     }
 
     @Override
@@ -91,7 +74,15 @@ public class ChooseImageFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcv_choose_image.setLayoutManager(linearLayoutManager);
 
-        chooseImageAdapter = new ChooseImageAdapter(getContext(), listImage);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv_choose_image.getContext(), linearLayoutManager.getOrientation());
+        rcv_choose_image.addItemDecoration(dividerItemDecoration);
+
+        chooseImageAdapter = new ChooseImageAdapter(getContext(), listImage, new IChooseImage() {
+            @Override
+            public void onChooseImage(ChooseImageModel chooseImageModel) {
+                chooseImageController.onChooseImage(chooseImageModel, chosenImage, chosenImageName, saveChosenImage);
+            }
+        });
         rcv_choose_image.setAdapter(chooseImageAdapter);
         chooseImageAdapter.notifyDataSetChanged();
     }

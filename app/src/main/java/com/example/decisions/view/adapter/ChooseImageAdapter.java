@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.decisions.R;
+import com.example.decisions.controller.system.IChooseImage;
 import com.example.decisions.model.ChooseImageModel;
 
 import java.util.ArrayList;
@@ -20,10 +21,12 @@ public class ChooseImageAdapter extends RecyclerView.Adapter<ChooseImageAdapter.
 
     private Context context;
     private ArrayList<ChooseImageModel> listImage;
+    private IChooseImage iChooseImage;
 
-    public ChooseImageAdapter(Context context, ArrayList<ChooseImageModel> listImage) {
+    public ChooseImageAdapter(Context context, ArrayList<ChooseImageModel> listImage, IChooseImage iChooseImage) {
         this.context = context;
         this.listImage = listImage;
+        this.iChooseImage = iChooseImage;
     }
 
     /**
@@ -59,6 +62,13 @@ public class ChooseImageAdapter extends RecyclerView.Adapter<ChooseImageAdapter.
         holder.imageDescription.setImageResource(chooseImageModel.getResourceImage());
         holder.imageDescription.setTag(chooseImageModel.getName());
         holder.textDescription.setText(chooseImageModel.getName());
+
+        holder.imageDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iChooseImage.onChooseImage(chooseImageModel);
+            }
+        });
     }
 
     /**

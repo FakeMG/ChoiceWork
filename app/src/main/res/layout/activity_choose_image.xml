@@ -14,7 +14,9 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/gray_fragment"
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/chosen_image"
@@ -24,13 +26,21 @@
             app:srcCompat="@drawable/quest_01" />
 
         <TextView
-            android:id="@+id/chosen_text"
+            android:id="@+id/chosen_image_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="@string/choose_image_text"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/save_chosen_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_save_24_gray"
+            android:clickable="false"/>
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView

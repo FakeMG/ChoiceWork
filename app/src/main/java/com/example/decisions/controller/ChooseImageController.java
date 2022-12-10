@@ -1,9 +1,15 @@
 package com.example.decisions.controller;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.decisions.R;
 import com.example.decisions.model.ChooseImageModel;
+import com.example.decisions.view.activity.ScheduleBoardActivity;
 
 import java.util.ArrayList;
 
@@ -37,5 +43,27 @@ public class ChooseImageController {
 
     public ArrayList<ChooseImageModel> getListImage() {
         return listImage;
+    }
+
+    public void onChooseImage(ChooseImageModel chooseImageModel, ImageView chosenImage, TextView chosenImageName, ImageView saveChosenImage) {
+        chosenImage.setImageResource(chooseImageModel.getResourceImage());
+        chosenImage.setTag(Integer.toString(chooseImageModel.getResourceImage()));
+        chosenImageName.setText(chooseImageModel.getName());
+        saveChosenImage.setImageResource(R.drawable.ic_baseline_save_24_black);
+        saveChosenImage.setClickable(true);
+    }
+
+    public void setOnClickSaveChosenImg(ImageView saveChosenImage, ImageView chosenImage, TextView chosenImageName) {
+        saveChosenImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ScheduleBoardActivity.class);
+                Bundle bundle = new Bundle();
+                ChooseImageModel chooseImageModel = new ChooseImageModel(chosenImageName.getText().toString(), Integer.parseInt(chosenImage.getTag().toString()));
+                bundle.putSerializable("chosen_image", chooseImageModel);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 }
