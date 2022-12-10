@@ -16,9 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.decisions.R;
-import com.example.decisions.controller.ScheduleBoardController;
+import com.example.decisions.controller.schedule.ScheduleBoardController;
 import com.example.decisions.model.schedule.ScheduleActionModel;
-import com.example.decisions.view.adapter.ScheduleBoardAdapter;
+import com.example.decisions.view.adapter.schedule.ScheduleBoardAdapter;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.decisions.view.adapter;
+package com.example.decisions.view.adapter.schedule;
 
 import android.content.ClipData;
 import android.content.ClipDescription;

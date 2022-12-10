@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.decisions.R;
-import com.example.decisions.controller.WaitingFragmentController;
+import com.example.decisions.controller.waiting.WaitingFragmentController;
 import com.example.decisions.controller.system.IClickWaitingBoard;
 import com.example.decisions.model.WaitingBoardModel;
 import com.example.decisions.view.adapter.WaitingFragmentAdapter;

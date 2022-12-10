@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.decisions.R;
-import com.example.decisions.controller.ScheduleBoardController;
+import com.example.decisions.controller.schedule.ScheduleBoardController;
 import com.example.decisions.controller.system.IReplaceFragment;
 import com.example.decisions.view.fragment.schedule.ScheduleBoardFragment;
 

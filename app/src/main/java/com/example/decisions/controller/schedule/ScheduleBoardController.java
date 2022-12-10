@@ -1,4 +1,4 @@
-package com.example.decisions.controller;
+package com.example.decisions.controller.schedule;
 
 import android.content.Context;
 import android.os.Bundle;
