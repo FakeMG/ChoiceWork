@@ -31,9 +31,11 @@ public class ScheduleFragmentController {
     }
 
     private ArrayList<ScheduleBoardModel> dataInitialize() {
-        for (int i = 1; i <= 13; i++) {
-            listSchedule.add(new ScheduleBoardModel("Schedule " + i, R.drawable.working_out_01));
-        }
+
+        listSchedule.add(new ScheduleBoardModel("At day", R.drawable.day_time_01));
+        listSchedule.add(new ScheduleBoardModel("Study", R.drawable.monday_01));
+        listSchedule.add(new ScheduleBoardModel("At night", R.drawable.night_time_01));
+        listSchedule.add(new ScheduleBoardModel("Activities", R.drawable.sunday_01));
 
         return listSchedule;
     }

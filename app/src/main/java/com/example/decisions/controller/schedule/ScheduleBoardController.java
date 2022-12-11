@@ -34,9 +34,11 @@ public class ScheduleBoardController {
 
     public void dataInitialize() {
         listActionSchedule = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) {
-            listActionSchedule.add(new ScheduleActionModel("Schedule action " + i, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
-        }
+        listActionSchedule.add(new ScheduleActionModel("Working", R.drawable.working_out_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
+        listActionSchedule.add(new ScheduleActionModel("Eating", R.drawable.eating_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
+        listActionSchedule.add(new ScheduleActionModel("Singing", R.drawable.singing_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
+        listActionSchedule.add(new ScheduleActionModel("Brushing", R.drawable.brushing_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
+        listActionSchedule.add(new ScheduleActionModel("Sleeping", R.drawable.sleeping_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
     }
 
     public void setHeaderData() {
@@ -87,9 +89,9 @@ public class ScheduleBoardController {
         Context context = scheduleBoardFragment.getContext();
         Intent intent = new Intent(context, ChooseImageActivity.class);
         context.startActivity(intent);
-        int pos = scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().size();
-        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
-        scheduleBoardFragment.scheduleBoardAdapter.notifyDataSetChanged();
+//        int pos = scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().size();
+//        scheduleBoardFragment.scheduleBoardAdapter.getListScheduleAction().add(new ScheduleActionModel("Schedule action " + pos, R.drawable.learning_01, R.drawable.ic_baseline_double_arrow_32, R.drawable.check_01));
+//        scheduleBoardFragment.scheduleBoardAdapter.notifyDataSetChanged();
     }
 
     public View getView() {

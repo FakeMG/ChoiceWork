@@ -174,15 +174,13 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
                 // Gets the text data from the item.
                 CharSequence dragData = itemSchedule.getText();
 
-                // Displays a message containing the dragged data.
-                Toast.makeText(this.getContext(), "Dragged data is " + dragData, Toast.LENGTH_LONG).show();
-
                 // Turns off any color tints.
                 ((ImageView)view).clearColorFilter();
 
                 // Invalidates the view to force a redraw.
                 view.invalidate();
 
+                // Set new image
                 ((ImageView) view).setTag(dragData);
                 ((ImageView) view).setImageResource(Integer.parseInt(dragData.toString()));
 
@@ -199,9 +197,9 @@ public class ScheduleBoardAdapter extends RecyclerView.Adapter<ScheduleBoardAdap
 
                 // Does a getResult(), and displays what happened.
                 if (dragEvent.getResult()) {
-                    Toast.makeText(this.getContext(), "The drop was handled.", Toast.LENGTH_LONG).show();
+
                 } else {
-                    Toast.makeText(this.getContext(), "The drop didn't work.", Toast.LENGTH_LONG).show();
+
                 }
 
                 // Returns true; the value is ignored.

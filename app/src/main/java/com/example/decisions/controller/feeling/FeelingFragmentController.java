@@ -33,9 +33,8 @@ public class FeelingFragmentController {
     }
 
     private ArrayList<FeelingBoardModel> dataInitialize() {
-        for (int i = 1; i <= 13; i++) {
-            listFeeling.add(new FeelingBoardModel("Feeling " + i, R.drawable.sleeping_01));
-        }
+        listFeeling.add(new FeelingBoardModel("Happy", R.drawable.happy_01));
+
         return listFeeling;
     }
 

@@ -31,9 +31,9 @@ public class WaitingFragmentController {
     }
 
     private ArrayList<WaitingBoardModel> dataInitialize() {
-        for (int i = 1; i <= 13; i++) {
-            listWaiting.add(new WaitingBoardModel("Waiting " + i, R.drawable.sun_01));
-        }
+        listWaiting.add(new WaitingBoardModel("Eating", R.drawable.eating_01));
+        listWaiting.add(new WaitingBoardModel("Singing", R.drawable.singing_01));
+
         return listWaiting;
     }
 
