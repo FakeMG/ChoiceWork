@@ -25,6 +25,7 @@
         android:id="@+id/card_feeling_img_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +35,7 @@
         <ImageView
             android:id="@+id/feeling_img_activity"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:contentDescription="@string/thumbnail"
             app:srcCompat="@drawable/learning_01" />
     </androidx.cardview.widget.CardView>
@@ -43,6 +44,7 @@
         android:id="@+id/text_view_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="I can"
         android:textColor="@color/black"
         android:textSize="24sp"
